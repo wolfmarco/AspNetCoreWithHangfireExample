@@ -9,10 +9,20 @@ namespace AspNetCoreWithHangfireExample.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly SingletonService _singletonService;
+        public ValuesController(SingletonService singletonService)
+        {
+            _singletonService = singletonService;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            _singletonService.Invoke();
+            _singletonService.Invoke();
+            _singletonService.Invoke();
+
             return new string[] { "value1", "value2" };
         }
 

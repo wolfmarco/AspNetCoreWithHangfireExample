@@ -24,6 +24,10 @@ namespace AspNetCoreWithHangfireExample
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
             services.AddHangfire(x =>
                 x.UseSqlServerStorage(@"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;"));
+
+            services.AddTransient<TransientService>();
+            services.AddScoped<ScopedService>();
+            services.AddSingleton<SingletonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
