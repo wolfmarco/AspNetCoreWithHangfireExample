@@ -7,5 +7,12 @@ namespace AspNetCoreWithHangfireExample
 {
     public class ScopedService
     {
+        public ScopedService()
+        {
+        }
+
+        internal void Invoke()
+        {
+        }
     }
 }

@@ -10,9 +10,14 @@ namespace AspNetCoreWithHangfireExample.Controllers
     public class ValuesController : Controller
     {
         private readonly SingletonService _singletonService;
-        public ValuesController(SingletonService singletonService)
+        private readonly ScopedService _scopedService;
+        private readonly TransientService _transientService;
+
+        public ValuesController(SingletonService singletonService, ScopedService scopedService, TransientService transientService)
         {
             _singletonService = singletonService;
+            _scopedService = scopedService;
+            _transientService = transientService;
         }
 
         // GET api/values
@@ -21,7 +26,12 @@ namespace AspNetCoreWithHangfireExample.Controllers
         {
             _singletonService.Invoke();
             _singletonService.Invoke();
-            _singletonService.Invoke();
+
+            _scopedService.Invoke();
+            _scopedService.Invoke();
+
+            _transientService.Invoke();
+            _transientService.Invoke();
 
             return new string[] { "value1", "value2" };
         }
